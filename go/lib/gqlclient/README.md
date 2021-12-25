@@ -5,7 +5,7 @@ how to use
 import (
     "log"
     
-    "github.com/warkum/toolkit/gqlclient"
+    "github.com/warkum/toolkit/go/lib/gqlclient"
 )
 
 func main() {
