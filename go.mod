@@ -15,6 +15,7 @@ require (
 	github.com/hashicorp/golang-lru v0.5.1 // indirect
 	github.com/jmoiron/sqlx v1.3.4
 	github.com/kubemq-io/protobuf v1.3.1 // indirect
+	github.com/machinebox/graphql v0.2.2
 	github.com/nats-io/nuid v1.0.1 // indirect
 	github.com/sirupsen/logrus v1.8.1
 	go.opencensus.io v0.22.0 // indirect
