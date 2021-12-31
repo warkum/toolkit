@@ -57,7 +57,7 @@ func TestClient_SendWhatsAppMessage(t *testing.T) {
 					Post(V1WhatsAppMessageSend).
 					JSON(a.req).
 					Reply(http.StatusBadRequest).
-					BodyString(`{"code":400,"message":"Send","status":"1"}`)
+					BodyString(`{"code":400,"message":"Send","status":1}`)
 			},
 			want:    SendWhatsAppMessageResponse{},
 			want1:   http.StatusBadRequest,
