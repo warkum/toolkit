@@ -16,6 +16,11 @@ const (
 	AUTH_BUYER AUTH_LEVEL = "BUYER"
 )
 
+const (
+	UserIDHeaderKey = "x-user-id"
+	RoleHeaderKey   = "x-roles"
+)
+
 type Auth struct {
 	UserID UUID
 	Msisdn string
@@ -48,4 +53,9 @@ func GetUserLevelInContext(ctx context.Context) AUTH_LEVEL {
 		userLevel = AUTH_LEVEL(value.Level)
 	}
 	return userLevel
+}
+
+func GetAuthInContext(ctx context.Context) *Auth {
+	value, _ := ctx.Value(XUserIDCtxKey).(*Auth)
+	return value
 }
