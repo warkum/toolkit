@@ -10,12 +10,29 @@ type (
 	AUTH_LEVEL string
 )
 
+func (l AUTH_LEVEL) IsAuthorizedAs(minLevel AUTH_LEVEL) bool {
+	rank, okRank := AUTH_RANK[l]
+	minRank, okMinRank := AUTH_RANK[minLevel]
+	if !okRank || !okMinRank {
+		return false
+	}
+
+	return rank >= minRank
+}
+
 const (
 	AUTH_SUPER AUTH_LEVEL = "SUPERADMIN"
 	AUTH_ADMIN AUTH_LEVEL = "ADMINISTRATOR"
 	AUTH_OPS   AUTH_LEVEL = "OPS"
 	AUTH_BUYER AUTH_LEVEL = "BUYER"
 )
+
+var AUTH_RANK = map[AUTH_LEVEL]int{
+	AUTH_BUYER: 0,
+	AUTH_OPS:   1,
+	AUTH_ADMIN: 2,
+	AUTH_SUPER: 3,
+}
 
 const (
 	UserIDHeaderKey = "x-user-id"
