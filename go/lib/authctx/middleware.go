@@ -29,6 +29,9 @@ func Middleware(next http.Handler) http.Handler {
 		if isContainAdmin := strings.Contains(xRoles, "admin"); isContainAdmin {
 			level = AUTH_ADMIN
 		}
+		if isContainAdmin := strings.Contains(xRoles, "super"); isContainAdmin {
+			level = AUTH_SUPER
+		}
 
 		userXUserID := Auth{
 			UserID: UUID(xUserID),
