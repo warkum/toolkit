@@ -31,7 +31,7 @@ func (q *Query) AddCondition(format string, data ...interface{}) {
 
 // AddString will append string at the end of query, after where condition finished
 func (q *Query) AddString(str string) {
-	q.sb.WriteString(" " + str)
+	q.extraStr = append(q.extraStr, str)
 }
 
 func (q *Query) buildWhere() {
@@ -45,8 +45,17 @@ func (q *Query) buildWhere() {
 		return
 	}
 
+	// add where condition if missing
 	if !strings.Contains(q.sb.String(), "where") {
-		whereSb.WriteString(" where ")
+		whereSb.WriteString(" where")
+	}
+
+	// cleanup first condition
+	if strings.HasPrefix(strings.TrimSpace(q.whereFmt[0]), "and ") {
+		q.whereFmt[0] = strings.Replace(q.whereFmt[0], "and ", "", 1)
+	}
+	if strings.HasPrefix(strings.TrimSpace(q.whereFmt[0]), "or ") {
+		q.whereFmt[0] = strings.Replace(q.whereFmt[0], "or ", "", 1)
 	}
 
 	// append all where conditions
@@ -60,6 +69,7 @@ func (q *Query) buildWhere() {
 		counter++
 		whereFmt = strings.Replace(whereFmt, "?", fmt.Sprintf("$%d", counter), 1)
 	}
+
 	q.sb.WriteString(whereFmt)
 }
 
