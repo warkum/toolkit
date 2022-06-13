@@ -23,10 +23,12 @@ const (
 )
 
 type Auth struct {
-	UserID UUID
-	Msisdn string
-	Level  AUTH_LEVEL
-	Expiry time.Duration
+	UserID     UUID
+	Msisdn     string
+	Level      AUTH_LEVEL
+	Expiry     time.Duration
+	Platform   string
+	AppVersion string
 }
 
 type ContextKey struct {
@@ -59,4 +61,22 @@ func GetUserLevelInContext(ctx context.Context) AUTH_LEVEL {
 func GetAuthInContext(ctx context.Context) *Auth {
 	value, _ := ctx.Value(XUserIDCtxKey).(*Auth)
 	return value
+}
+
+func GetPlatformInContext(ctx context.Context) string {
+	value, _ := ctx.Value(XUserIDCtxKey).(*Auth)
+	var platform string
+	if value != nil {
+		platform = string(value.Platform)
+	}
+	return platform
+}
+
+func GetAppVersionInContext(ctx context.Context) string {
+	value, _ := ctx.Value(XUserIDCtxKey).(*Auth)
+	var version string
+	if value != nil {
+		version = string(value.AppVersion)
+	}
+	return version
 }
