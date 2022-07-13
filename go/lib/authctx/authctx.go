@@ -18,8 +18,10 @@ const (
 )
 
 const (
-	UserIDHeaderKey = "x-user-id"
-	RoleHeaderKey   = "x-roles"
+	UserIDHeaderKey       = "x-user-id"
+	RoleHeaderKey         = "x-roles"
+	HasuraUserIDHeaderKey = "x-hasura-user-id"
+	HasuraRoleHeaderKey   = "x-hasura-role"
 )
 
 type Auth struct {

@@ -11,8 +11,12 @@ import (
 func Middleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		xUserID := r.Header.Get(UserIDHeaderKey)
+		if xUserID == "" {
+			xUserID = r.Header.Get(HasuraUserIDHeaderKey)
+		}
 		log.Debug("[DEBUG] userID ", xUserID)
 
+		// user ID headers not found
 		if xUserID == "" {
 			next.ServeHTTP(w, r)
 			return
@@ -20,6 +24,9 @@ func Middleware(next http.Handler) http.Handler {
 
 		// assume roles value like this "admin,ops"
 		xRoles := r.Header.Get(RoleHeaderKey)
+		if xRoles == "" {
+			xRoles = r.Header.Get(HasuraRoleHeaderKey)
+		}
 		log.Debug("[DEBUG] roles ", xRoles)
 
 		var level = AUTH_BUYER
