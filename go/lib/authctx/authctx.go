@@ -22,6 +22,9 @@ const (
 	RoleHeaderKey         = "x-roles"
 	HasuraUserIDHeaderKey = "x-hasura-user-id"
 	HasuraRoleHeaderKey   = "x-hasura-role"
+	UserLevelHeaderKey    = "x-user-level"
+	AppPlatformHeaderKey  = "warkum-app-platform"
+	AppVersionHeaderKey   = "warkum-app-version"
 )
 
 type Auth struct {
