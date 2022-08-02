@@ -1,0 +1,11 @@
+metric:
+  app_name: "example-with-config"
+  configs:
+    - name: "abc.test_sent"
+      description: "data test sent counter"
+      unit: "1" #1, By or ms
+      type: "counter" #counter, up_down_counter & histogram
+    - name: "abc.test_sent"
+      description: "data test sent histogram"
+      unit: "ms" #1, By or ms
+      type: "histogram" #counter, up_down_counter & histogram
